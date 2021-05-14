@@ -9,9 +9,9 @@ dl_and_unzip() {
   url="$1"
   filename=$(basename "$url")
   hash="$2"
-  curl -LfO "$url"
-  echo "$hash  $filename" | shasum -a 224 -c || exit 1
-  tar xjf "$filename"
+  curl -Lf -o "/tmp/$filename" "$url"
+  echo "$hash  /tmp/$filename" | shasum -a 224 -c || exit 1
+  tar xjf "/tmp/$filename"
 }
 
 set -e # Stop as soon as a command fails.
